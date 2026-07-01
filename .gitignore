@@ -1,0 +1,24 @@
+# Kubernetes
+*.kubeconfig
+k3s.yaml
+
+# Cloudflare
+*.json
+cloudflared/
+
+# Secrets
+*.pem
+*.key
+*.crt
+
+# Temporary
+*.log
+*.tmp
+
+# Editor
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
