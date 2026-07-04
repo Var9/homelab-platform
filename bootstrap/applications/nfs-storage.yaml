@@ -1,63 +1,31 @@
-
 apiVersion: argoproj.io/v1alpha1
-
 kind: Application
 
-
-
 metadata:
-
   name: nfs-storage
-
   namespace: argocd
 
-
-
 spec:
-
   project: default
 
-
-
   source:
-
     repoURL: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
-
     chart: csi-driver-nfs
-
     targetRevision: 4.11.0
 
-
-
-  helm:
-
-  values: |
-
-    storageClass:
-
-      create: false 
-
-
+    helm:
+      values: |
+        storageClass:
+          create: false
 
   destination:
-
     server: https://kubernetes.default.svc
-
     namespace: kube-system
 
-
-
   syncPolicy:
-
     automated:
-
       prune: true
-
       selfHeal: true
 
-
-
     syncOptions:
-
       - CreateNamespace=true
-
