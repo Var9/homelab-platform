@@ -1,0 +1,162 @@
+# -------------------------------------------------------------------
+# Airflow Version
+# -------------------------------------------------------------------
+
+defaultAirflowTag: "3.2.2"
+
+executor: CeleryExecutor
+
+# -------------------------------------------------------------------
+# PostgreSQL
+# -------------------------------------------------------------------
+
+postgresql:
+  enabled: true
+
+  persistence:
+    enabled: true
+    storageClass: nfs-storage
+    size: 8Gi
+
+# -------------------------------------------------------------------
+# Redis
+# -------------------------------------------------------------------
+
+redis:
+  enabled: true
+
+# -------------------------------------------------------------------
+# DAG Processor
+# -------------------------------------------------------------------
+
+dagProcessor:
+  enabled: true
+
+  replicas: 1
+
+# -------------------------------------------------------------------
+# Scheduler
+# -------------------------------------------------------------------
+
+scheduler:
+  replicas: 1
+
+  startupProbe:
+    initialDelaySeconds: 0
+    timeoutSeconds: 60
+    periodSeconds: 10
+    failureThreshold: 18
+
+  livenessProbe:
+    timeoutSeconds: 60
+
+  resources:
+    requests:
+      cpu: 200m
+      memory: 256Mi
+
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+# -------------------------------------------------------------------
+# Triggerer
+# -------------------------------------------------------------------
+
+triggerer:
+  enabled: true
+  replicas: 1
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+
+    limits:
+      cpu: 250m
+      memory: 256Mi
+
+# -------------------------------------------------------------------
+# Webserver
+# -------------------------------------------------------------------
+
+webserver:
+  replicas: 1
+
+  resources:
+    requests:
+      cpu: 150m
+      memory: 256Mi
+
+    limits:
+      cpu: 500m
+      memory: 512Gi
+
+# -------------------------------------------------------------------
+# Workers
+# -------------------------------------------------------------------
+
+workers:
+  replicas: 1
+
+  celery:
+    resources:
+      requests:
+        cpu: 250m
+        memory: 256Mi
+
+      limits:
+        cpu: 750m
+        memory: 512Mi
+
+# -------------------------------------------------------------------
+# DAG 
+
+dagProcessor:
+  enabled: true
+  replicas: 1
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+
+    limits:
+      cpu: 250m
+      memory: 512Mi
+
+
+# -------------------------------------------------------------------
+# Logs
+# -------------------------------------------------------------------
+
+logs:
+  persistence:
+    enabled: true
+    storageClassName: nfs-storage
+    size: 10Gi
+
+# -------------------------------------------------------------------
+# Ingress
+# -------------------------------------------------------------------
+
+ingress:
+  enabled: false
+
+
+#-----------------
+#APIServer
+#---------------------
+
+apiServer:
+  startupProbe:
+    initialDelaySeconds: 0
+    timeoutSeconds: 60
+    periodSeconds: 10
+    failureThreshold: 18
+
+  livenessProbe:
+    timeoutSeconds: 30
+
+  readinessProbe:
+    timeoutSeconds: 30

@@ -22,3 +22,6 @@ cloudflared/
 # OS
 .DS_Store
 Thumbs.db
+
+# Generated Helm manifests
+applications/airflow/airflow-rendered.yaml
