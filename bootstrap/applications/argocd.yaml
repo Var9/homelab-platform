@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 
 metadata:
-  name: homelab-platform
+  name: argocd
   namespace: argocd
 
 spec:
@@ -11,11 +11,11 @@ spec:
   source:
     repoURL: https://github.com/Var9/homelab-platform.git
     targetRevision: main
-    path: bootstrap/applications
+    path: infrastructure/argocd
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: argocd
 
   syncPolicy:
     automated:
