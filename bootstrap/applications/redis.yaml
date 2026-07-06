@@ -18,7 +18,9 @@ spec:
         architecture: standalone
 
         auth:
-          enabled: false
+            enabled: true
+            existingSecret: redis-secret
+            existingSecretPasswordKey: redis-password
 
         master:
           persistence:
