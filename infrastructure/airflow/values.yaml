@@ -1,0 +1,32 @@
+executor: CeleryExecutor
+
+postgresql:
+  enabled: false
+
+redis:
+  enabled: false
+
+data:
+  metadataSecretName: airflow-metadata-secret
+  brokerUrlSecretName: airflow-broker-secret
+
+fernetKeySecretName: airflow-fernet-secret
+
+webserverSecretKeySecretName: airflow-webserver-secret
+
+dags:
+  gitSync:
+    enabled: true
+
+    repo: https://github.com/Var9/airflow-dags.git
+    branch: main
+    rev: HEAD
+
+logs:
+  persistence:
+    enabled: true
+    storageClassName: nfs-client
+    size: 10Gi
+
+workers:
+  replicas: 1
