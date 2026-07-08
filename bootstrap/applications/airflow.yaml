@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: airflow
+  namespace: argocd
+
+spec:
+  project: default
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: airflow
+
+  sources:
+
+    # Airflow Helm Chart
+    - repoURL: https://airflow.apache.org
+      chart: airflow
+      targetRevision: 1.18.0
+
+      helm:
+        releaseName: airflow
+
+        valueFiles:
+          - $values/infrastructure/airflow/values.yaml
+
+    # Values Repository
+    - repoURL: https://github.com/Var9/homelab-platform.git
+      targetRevision: main
+      ref: values
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - CreateNamespace=true

@@ -1,5 +1,7 @@
 executor: CeleryExecutor
 
+defaultAirflowTag: "3.2.2"
+
 postgresql:
   enabled: false
 
@@ -14,19 +16,47 @@ fernetKeySecretName: airflow-fernet-secret
 
 webserverSecretKeySecretName: airflow-webserver-secret
 
+apiSecretKeySecretName: airflow-api-secret-key
+
+jwtSecretKeySecretName: airflow-jwt-secret
+
+createUserJob:
+  useHelmHooks: false
+
+migrateDatabaseJob:
+  useHelmHooks: false
+
+dagProcessor:
+  enabled: true
+
+scheduler:
+  replicas: 1
+
+triggerer:
+  enabled: true
+
+workers:
+  replicas: 1
+
 dags:
+  persistence:
+    enabled: false
+
   gitSync:
     enabled: true
 
-    repo: https://github.com/Var9/airflow-dags.git
+    repo: git@github.com:Var9/airflow-dags.git
+
     branch: main
+
     rev: HEAD
+
+    sshKeySecret: airflow-git-ssh
 
 logs:
   persistence:
     enabled: true
-    storageClassName: nfs-client
-    size: 10Gi
 
-workers:
-  replicas: 1
+    storageClassName: nfs-client
+
+    size: 10Gi
