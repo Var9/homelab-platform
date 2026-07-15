@@ -25,6 +25,10 @@ spec:
               - grafana.datastoragevault.co.in
             path: /
 
+        prometheus-node-exporter:
+          nodeSelector:
+            node-role.kubernetes.io/worker: ""
+
         prometheus:
           ingress:
             enabled: true
