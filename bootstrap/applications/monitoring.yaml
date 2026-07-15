@@ -26,6 +26,15 @@ spec:
             path: /
 
         prometheus:
+          ingress:
+            enabled: true
+            ingressClassName: nginx
+            hosts:
+              - prometheus.datastoragevault.co.in
+            paths:
+              - /
+            pathType: Prefix
+
           prometheusSpec:
             storageSpec:
               volumeClaimTemplate:
