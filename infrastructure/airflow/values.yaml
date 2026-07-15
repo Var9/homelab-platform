@@ -20,6 +20,15 @@ apiSecretKeySecretName: airflow-api-secret-key
 
 jwtSecretKeySecretName: airflow-jwt-secret
 
+ingress:
+  apiServer:
+    enabled: true
+    ingressClassName: nginx
+    path: "/"
+    pathType: Prefix
+    hosts:
+      - name: airflow.datastoragevault.co.in
+
 createUserJob:
   useHelmHooks: false
 

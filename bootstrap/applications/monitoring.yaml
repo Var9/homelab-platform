@@ -18,6 +18,13 @@ spec:
         grafana:
           enabled: true
 
+          ingress:
+            enabled: true
+            ingressClassName: nginx
+            hosts:
+              - grafana.datastoragevault.co.in
+            path: /
+
         prometheus:
           prometheusSpec:
             storageSpec:
