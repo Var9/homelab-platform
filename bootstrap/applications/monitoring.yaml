@@ -27,7 +27,7 @@ spec:
 
         prometheus-node-exporter:
           nodeSelector:
-            node-role.kubernetes.io/worker: ""
+            node-role.kubernetes.io/worker: "worker"
 
         prometheus:
           ingress:
