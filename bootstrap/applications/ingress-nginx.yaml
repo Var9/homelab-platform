@@ -18,6 +18,8 @@ spec:
         controller:
           service:
             type: NodePort
+            nodePorts:
+              http: 32080
 
   destination:
     server: https://kubernetes.default.svc
